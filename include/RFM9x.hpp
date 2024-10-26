@@ -11,7 +11,7 @@
 #define reg_FIFO 0x00
 #define address_TX 0x80 // Start Address for TX in FIFO
 #define address_RX 0x00 // Start Address for RX in FIFO
-#define FIFO_PNTR 0x0D //FIFO address pointer, MUST BE SET before read and write operation
+#define FIFO_PNTR 0x0D //FIFO address pointer, MUST BE SET before read and write operation to the FIFO
 
 #define Reg_OpMode 0x01 
 //OpMode Commands===========================
@@ -33,6 +33,9 @@
 #define Mode_RX_Recieve_Sing 0x06
 #define Mode_CAD 0x07
 //==========================================
+
+#define reg_Modem_Config 0x1E
+#define reg_Pa_Config 0x09
 
 
 enum STATE_RX

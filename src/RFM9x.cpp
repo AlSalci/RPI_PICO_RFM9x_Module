@@ -45,6 +45,15 @@ RFM9x::RFM9x(SPI *spi,int RST,int G0,int EN)
 
     }
     RFM9x_Write_Register(0x11,0x08); // Set interrupt masks for reciever and transimiter
+    RFM9x_Read_Register(0x1D);
+    RFM9x_Write_Register(0x1D, (spi->input_buffer[0] & ~0x07)|0x60 );
+
+    RFM9x_Read_Register(reg_Pa_Config);
+    RFM9x_Write_Register(reg_Pa_Config, (spi->input_buffer[0] & ~0x70)|0xC0 );
+
+    RFM9x_Read_Register(reg_Modem_Config);
+   // RFM9x_Write_Register(reg_Modem_Config, (spi->input_buffer[0] & ~0xF0)|0xC0 );
+
   //  RFM9x_Write_Register(0x1E,0x08); 
     RFM9x_Standby();
 
@@ -132,7 +141,8 @@ if((spi->input_buffer[0] & 0x40) != 0)
     RFM9x_Write_Register(0x12, 0x00);
     RFM9x_Write_Register(FIFO_PNTR,address_RX);//FIFO start address
     RFM9x_Read_Register(reg_FIFO);
-    printf("Character Recieved: %c\n",spi->input_buffer[0]);
+     printf("%x\n", spi->input_buffer[0]);
+    //printf("Character Recieved: %c\n",spi->input_buffer[0]);
    // spi->print_buffer(spi->input_buffer, 1);
     //reciever_state = STANDBY_RX;
 }
